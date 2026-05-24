@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKStream Console Administration</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="top-bar">
+                <div class="brand-zone">
+                    <div class="logo-circle">MK</div>
+                    <h1 class="brand-title">Production Admin Console</h1>
+                </div>
+                <div class="control-zone" style="margin-left:auto;">
+                    <a href="index.html" class="utility-icon-btn" style="color:var(--button-active-accent); text-decoration:none; font-weight:bold; font-size:13px;"><i class="fa-solid fa-house"></i> Close Terminal</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="admin-workspace-grid">
+            <aside style="background:var(--widget-bg); border:1px solid var(--border-color); padding:16px; border-radius:8px; display:flex; flex-direction:column; gap:20px;">
+                <div>
+                    <h3 class="row-title" style="font-size:12px; margin-bottom:12px; color:var(--button-active-accent);">Upload Data Point</h3>
+                    <form id="adminUploadForm">
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Category Channel</label>
+                            <select id="admCategory" class="adm-form-field">
+                                <option value="anime">Anime</option>
+                                <option value="donghua">Donghua</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="series">Series</option>
+                                <option value="serial">Serial</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Row Segment Allocation</label>
+                            <select id="admSubcategory" class="adm-form-field">
+                                <option value="trending">Trending Now</option>
+                                <option value="continue">Continue Watching</option>
+                                <option value="newest">Newest</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Title</label>
+                            <input type="text" id="admTitle" placeholder="e.g. Kyoto Drift" required class="adm-form-field">
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Season & Episode Mapping</label>
+                            <div class="multi-input-row">
+                                <input type="text" id="admSeason" placeholder="Season" class="adm-form-field">
+                                <input type="text" id="admEpisode" placeholder="Episode" class="adm-form-field">
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Languages (Comma Separated) (+)</label>
+                            <input type="text" id="admLanguages" placeholder="Japanese, English Dub" class="adm-form-field">
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Subtitles (Comma Separated)</label>
+                            <input type="text" id="admSubtitles" placeholder="English, Spanish" class="adm-form-field">
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Servers List (Comma Separated) (+)</label>
+                            <input type="text" id="admServers" placeholder="Server 1, Server 2" class="adm-form-field">
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Asset Thumbnail Source (URL)</label>
+                            <input type="url" id="admThumbnail" placeholder="https://..." class="adm-form-field">
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Source Direct Target Mode</label>
+                            <select id="admMediaType" class="adm-form-field">
+                                <option value="url">Direct Video Resource URL</option>
+                                <option value="embed">Embedded Block Code Snippet (iframe)</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Video Target URL / Embedded Code Script</label>
+                            <textarea id="admVideoLink" placeholder="Enter source code parameters..." required class="adm-form-field" style="height:50px; font-family:monospace; font-size:11px; resize:none;"></textarea>
+                        </div>
+
+                        <div style="margin-bottom:14px;">
+                            <label style="font-size:10px; font-weight:700; display:block; margin-bottom:4px; color:var(--text-primary);">Telegram Pipeline Endpoint (URL)</label>
+                            <input type="url" id="admTelegramUrl" placeholder="https://t.me/..." class="adm-form-field">
+                        </div>
+
+                        <button type="submit" style="width:100%; background:var(--button-active-accent); color:#000; font-weight:800; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:12px;">Inject Media Node Data</button>
+                    </form>
+                </div>
+            </aside>
+
+            <main style="background:var(--widget-bg); border:1px solid var(--border-color); padding:24px; border-radius:8px; display:flex; flex-direction:column; gap:28px;">
+                
+                <section style="border-bottom:1px dashed var(--border-color); padding-bottom:24px;">
+                    <h2 class="row-title" style="color:var(--button-active-accent);">Ad Management Pipeline & Constraints Rules</h2>
+                    
+                    <form id="adminAdConfigForm" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin-top:14px;">
+                        <div>
+                            <label style="font-size:11px; color:var(--text-primary); font-weight:700;">Frequency Rule Interval (User Minutes Time Gap)</label>
+                            <input type="number" id="admFrequencyGap" class="adm-form-field" style="margin-top:6px;">
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:var(--text-primary); font-weight:700;">Active Global Header Ad State (Banner Layout)</label>
+                            <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+                                <input type="checkbox" id="admBannerToggle">
+                                <span style="font-size:12px; font-weight:700; color:var(--text-primary);">Render Active Across Platform Headers</span>
+                            </div>
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <label style="font-size:11px; color:var(--text-primary); font-weight:700;">Banner Ad Display File Asset Link (URL)</label>
+                            <input type="url" id="admBannerImg" class="adm-form-field" style="margin-top:6px;">
+                        </div>
+                        <div style="grid-column: span 2; text-align:right;">
+                            <button type="submit" style="background:var(--text-primary); color:var(--bg-main); font-weight:700; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-size:12px;">Save System Rule Constraints</button>
+                        </div>
+                    </form>
+
+                    <div class="visual-ad-blueprint-card">
+                        <div style="font-size:11px; font-weight:700; text-align:left; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">Visualized Live Banner Engine Target Layout</div>
+                        <div class="blueprint-display-window">
+                            <img id="visualBlueprintImgElement" src="" alt="Dynamic Visual Ad Panel Target">
+                        </div>
+                        <div style="font-size:10px; font-family:monospace; text-align:left; color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <strong>Asset Path Parameters:</strong> <span id="visualBlueprintUrlText">--</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="row-title" style="color:var(--button-active-accent); margin-bottom:4px;">Registered Structural Content Grid Indices (Purge/Delete Format)</h2>
+                    <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">Monitor database tracking indices and execute explicit structural purge rules.</p>
+                    
+                    <div class="admin-data-table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Category Stream</th>
+                                    <th>Segment Row</th>
+                                    <th>Content Title</th>
+                                    <th>Mapping Sequence</th>
+                                    <th>Target Routing Pipeline Node</th>
+                                    <th>Matrix Ops</th>
+                                </tr>
+                            </thead>
+                            <tbody id="structuralDeletionTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
