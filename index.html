@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKStream - Mobile Optimized Streaming Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="top-bar">
+                <div class="brand-zone">
+                    <a href="index.html" class="logo-group" style="text-decoration: none; color: inherit;">
+                        <div class="logo-circle">MK</div>
+                        <h1 class="brand-title">MKStream</h1>
+                    </a>
+                </div>
+
+                <div class="search-zone">
+                    <input type="text" placeholder="Search categories..." class="search-input">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+
+                <div class="control-zone" style="display:flex; gap:10px;">
+                    <a href="admin.html" class="utility-icon-btn" style="color:var(--button-active-accent); font-size:18px;"><i class="fa-solid fa-user-gear"></i></a>
+                </div>
+            </div>
+
+            <nav class="desktop-nav">
+                <a class="nav-item active" data-target-category="anime">ANIME</a>
+                <a class="nav-item" data-target-category="donghua">DONGHUA</a>
+                <a class="nav-item" data-target-category="cartoon">CARTOON</a>
+                <a class="nav-item" data-target-category="series">SERIES</a>
+                <a class="nav-item" data-target-category="serial">SERIAL</a>
+            </nav>
+        </header>
+
+        <div class="global-ad-chassis-wrapper" id="globalAdChassis">
+            <div class="ad-banner-frame">
+                <span class="ad-badge-tag">Sponsor Banner</span>
+                <img id="adBannerTargetImg" src="" alt="Global Banner View Segment">
+            </div>
+        </div>
+
+        <main class="home-stream-layout" id="catalogDisplayWorkspace">
+            <div class="category-view-group active" id="anime-view-pane"></div>
+            <div class="category-view-group" id="donghua-view-pane"></div>
+            <div class="category-view-group" id="cartoon-view-pane"></div>
+            <div class="category-view-group" id="series-view-pane"></div>
+            <div class="category-view-group" id="serial-view-pane"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
